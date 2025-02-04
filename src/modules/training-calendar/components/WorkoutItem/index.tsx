@@ -2,16 +2,26 @@ import { Button } from '../../../../theme/components';
 import styles from './index.module.css';
 import { SvgThreeDots, SvgAddButton } from '../../../../assets/svg-icons';
 import ExerciseItem from '../ExerciseItem';
+import { memo } from 'react';
+import { ICommonProps } from '../../../../shared/models';
+import { WorkoutViewModel } from '../../models';
 
-const WorkoutItem = () => {
+interface IWorkoutItemProps extends ICommonProps {
+    workout: WorkoutViewModel;
+}
+
+const WorkoutItem = (props: IWorkoutItemProps) => {
+    const { workout } = props;
+
     return (
         <div className={styles['workout-wrapper']}>
             {/* Header */}
             <div className={styles['workout-header']}>
-                {/* TODO: Add title */}
-                <div className={`${styles['workout-name']} truncate`}
-                    title={'Chest day - with arm...'}>
-                    Chest day - with arm...
+                <div
+                    className={`${styles['workout-name']} truncate`}
+                    title={workout.name}
+                >
+                    {workout.name}
                 </div>
                 {/* 3 dots button */}
                 <Button title="Edit Workout">
@@ -20,11 +30,18 @@ const WorkoutItem = () => {
             </div>
             {/* Exercises */}
             <div className={styles['workout__exercise-list']}>
-                <ExerciseItem />
-                <ExerciseItem />
-                <ExerciseItem />
-                <ExerciseItem />
-                <ExerciseItem />
+                {workout?.exercises?.length > 0 ? (
+                    workout.exercises.map((exercise, exerciseIndex) => {
+                        return (
+                            <ExerciseItem
+                                key={exerciseIndex}
+                                exercise={exercise}
+                            ></ExerciseItem>
+                        );
+                    })
+                ) : (
+                    <></>
+                )}
             </div>
 
             {/* Add Button */}
@@ -37,4 +54,4 @@ const WorkoutItem = () => {
     );
 };
 
-export default WorkoutItem;
+export default memo(WorkoutItem);

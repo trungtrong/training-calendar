@@ -1,15 +1,25 @@
+import { memo } from 'react';
 import styles from './index.module.css';
+import { ExerciseViewModel } from '../../models';
+import { ICommonProps } from '../../../../shared/models';
 
-const ExerciseItem = () => {
+interface IExerciseItemProps extends ICommonProps {
+    exercise: ExerciseViewModel;
+}
+
+
+const ExerciseItem = (props: IExerciseItemProps) => {
+    const { exercise } = props;
+
     return (
         <div className={styles['exercise-wrapper']}>
             {/* Name */}
             {/* TODO: Add title */}
             <div
                 className={`${styles['exercise-name']} truncate`}
-                title={'Bench Press Med...'}
+                title={exercise.name}
             >
-                Bench Press Med...
+                { exercise.name }
             </div>
             <div className={styles['exercise-info-container']}>
                 <div className={`${styles['exercise__number-of-set']}`}>3x</div>
@@ -23,4 +33,4 @@ const ExerciseItem = () => {
     );
 };
 
-export default ExerciseItem;
+export default memo(ExerciseItem);

@@ -1,5 +1,6 @@
 export class ExerciseBaseModel {
     id!: string;
+    name!: string;
     numberOfSet!: number;
     info!: string;
 

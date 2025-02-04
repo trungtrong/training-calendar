@@ -36,9 +36,17 @@
     line-height: 14.98px;
     text-align: left;
     color: #728096;
+
+    &[data-current-date="true"] {
+        font-weight: 700;
+        color: #5A57CB;
+    }
 }
 
 .kanban-column__workout-list {
     overflow-y: auto;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }

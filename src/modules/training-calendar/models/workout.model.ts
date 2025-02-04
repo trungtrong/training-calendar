@@ -12,6 +12,8 @@ export class WorkoutBaseModel {
 }
 
 export class WorkoutViewModel extends WorkoutBaseModel {
+    exercises: ExerciseViewModel[] = [];
+
     constructor(init?: Partial<WorkoutViewModel>) {
         super();
         Object.assign(this, init);

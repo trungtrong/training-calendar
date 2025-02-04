@@ -1,1 +1,11 @@
-export const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+import { DaysEnum } from '../enums/days.constant';
+
+export const DAYS = [
+    DaysEnum.Mon,
+    DaysEnum.Tue,
+    DaysEnum.Wed,
+    DaysEnum.Thu,
+    DaysEnum.Fri,
+    DaysEnum.Sat,
+    DaysEnum.Sun,
+];

@@ -1,15 +1,28 @@
 import { WorkoutViewModel } from './workout.model';
 
-export class WorkoutDayBaseModel {
-    [day: string]: WorkoutViewModel[];
+export class WorkoutDaysViewModel {
+    [day: string]: WorkoutsInDayViewModel;
 
-    constructor(init?: Partial<WorkoutDayBaseModel>) {
+    constructor(init?: Partial<WorkoutDaysViewModel>) {
         Object.assign(this, init);
     }
 }
 
-export class WorkoutDayViewModel extends WorkoutDayBaseModel {
-    constructor(init?: Partial<WorkoutDayViewModel>) {
+export class WorkoutsInDayBaseModel {
+    date!: string;
+    workouts!: WorkoutViewModel[];
+
+    constructor(init?: Partial<WorkoutsInDayBaseModel>) {
+        Object.assign(this, init);
+    }
+}
+
+export class WorkoutsInDayViewModel extends WorkoutsInDayBaseModel {
+    dayName!: string;
+    dayNumber!: number;
+    workouts: WorkoutViewModel[] = [];
+
+    constructor(init?: Partial<WorkoutsInDayViewModel>) {
         super();
         Object.assign(this, init);
     }
