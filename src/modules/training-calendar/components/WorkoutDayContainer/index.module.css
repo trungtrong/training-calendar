@@ -11,8 +11,9 @@
     font-weight: 600;
     line-height: 13.62px;
     text-align: left;
-    /* Make it as variables */
+    /* TODO: Make it as variables */
     color: #6A7988;
+    text-transform: uppercase;
 }
 
 .kanban-column__workout-list-container {

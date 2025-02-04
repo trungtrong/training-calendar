@@ -1,14 +1,23 @@
 // TODO: Fix Path issue
 import { SvgAddButton } from '../../../../assets/svg-icons';
+import { ICommonProps } from '../../../../shared/models';
 import { Button } from '../../../../theme/components';
 import WorkoutItem from '../WorkoutItem';
 import styles from './index.module.css';
 
-const WorkoutDayContainer = () => {
+interface IWorkoutDayContainerProps extends ICommonProps {
+    day: string;
+}
+
+const WorkoutDayContainer = (props: IWorkoutDayContainerProps) => {
+    const {
+        day
+    } = props;
+
     return (
         <div className={styles['kanban-column-container']}>
             {/* Day Name */}
-            <div className={`${ styles['kanban-column__day'] } truncate`}>MON</div>
+            <div className={`${ styles['kanban-column__day'] } truncate`}>{day}</div>
             {/* Kanban Column */}
             <div className={styles['kanban-column__workout-list-container']}>
                 <div className={styles['workout-list__header']}>
