@@ -1,10 +1,12 @@
-import './App.css'
+import { Suspense } from 'react';
+import './App.css';
 
-function App() {
-  return (
-    <div> Hêllo
-    </div>
-  )
-}
+const App = () => {
+    return (
+        <Suspense fallback={<div>Loading</div>}>
+            <div>Hello</div>
+        </Suspense>
+    );
+};
 
-export default App
+export default App;
