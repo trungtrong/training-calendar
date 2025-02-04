@@ -1,0 +1,43 @@
+.kanban-column-container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: max-content 1fr;
+    gap: 9px;
+    min-width: 179px;
+}
+
+.kanban-column__day {
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 13.62px;
+    text-align: left;
+    /* Make it as variables */
+    color: #6A7988;
+}
+
+.kanban-column__workout-list-container {
+    border-radius: 6px;
+    background-color: #F3F5F8;
+    opacity: 80.17%;
+    padding: 7px;
+}
+
+.workout-list__header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 2.53px 2.42px 4.27px 3px;
+}
+
+.kanban-column__date {
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 14.98px;
+    text-align: left;
+    color: #728096;
+}
+
+.kanban-column__workout-list {
+    overflow-y: auto;
+    overflow-x: hidden;
+}

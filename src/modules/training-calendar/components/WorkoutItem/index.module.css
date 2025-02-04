@@ -1,0 +1,33 @@
+.workout-wrapper {
+    padding: 4.93px 3px;
+    border: 1px solid #22242626;
+    border-radius: 6px;
+    background: #FFFFFFCC;
+    cursor: pointer;
+}
+
+.workout-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    color: #726EE4;
+    padding: 0 4px 4.93px;
+}
+
+.workout-name {
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 13.62px;
+    text-align: left;
+
+}
+
+.workout-header__three-dot-button {}
+
+.workout__add-exercise-button {
+    display: flex;
+    justify-content: end;
+}

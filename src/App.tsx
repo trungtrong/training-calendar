@@ -1,10 +1,12 @@
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import './App.css';
+
+const TrainingCalendar = lazy(() => import('./modules/training-calendar/training-calendar'));
 
 const App = () => {
     return (
         <Suspense fallback={<div>Loading</div>}>
-            <div>Hello</div>
+            <TrainingCalendar />
         </Suspense>
     );
 };

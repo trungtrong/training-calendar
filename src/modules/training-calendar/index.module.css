@@ -1,0 +1,13 @@
+.training-calendar-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 60px 63.5px;
+}
+
+.training-calendar-kanban-container {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: 100%;
+    height: 100%;
+    gap: 10px;
+}
