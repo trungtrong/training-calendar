@@ -1,0 +1,38 @@
+.exercise-wrapper {
+    padding: 4.93px 8px;
+    background: #FFFFFF;
+    border-radius: 3px 0px 0px 0px;
+    border: 1px solid #DFDFDF;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+}
+
+.exercise-name {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 17.7px;
+    color: #000000;
+    text-align: right;
+}
+
+.exercise-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: nowrap;
+}
+
+.exercise__number-of-set {
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 13.62px;
+    color: #919CAD;
+    width: max-content;
+}
+
+.exercise-info {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 13.62px;
+    color: #95A6B7;
+}

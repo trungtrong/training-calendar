@@ -1,5 +1,5 @@
 // TODO: Fix Path issue
-import { SvgAddButton } from '../../../../assets/svg-icons/add-button.svg';
+import { SvgAddButton } from '../../../../assets/svg-icons';
 import { Button } from '../../../../theme/components';
 import WorkoutItem from '../WorkoutItem';
 import styles from './index.module.css';

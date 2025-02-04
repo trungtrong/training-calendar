@@ -22,10 +22,13 @@
     font-weight: 700;
     line-height: 13.62px;
     text-align: left;
-
 }
 
-.workout-header__three-dot-button {}
+.workout__exercise-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3.95px;
+}
 
 .workout__add-exercise-button {
     display: flex;

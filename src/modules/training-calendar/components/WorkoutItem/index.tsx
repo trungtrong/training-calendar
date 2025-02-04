@@ -1,6 +1,7 @@
 import { Button } from '../../../../theme/components';
 import styles from './index.module.css';
 import { SvgThreeDots, SvgAddButton } from '../../../../assets/svg-icons';
+import ExerciseItem from '../ExerciseItem';
 
 const WorkoutItem = () => {
     return (
@@ -18,10 +19,16 @@ const WorkoutItem = () => {
                 </Button>
             </div>
             {/* Exercises */}
-            <div></div>
+            <div className={styles['workout__exercise-list']}>
+                <ExerciseItem />
+                <ExerciseItem />
+                <ExerciseItem />
+                <ExerciseItem />
+                <ExerciseItem />
+            </div>
 
             {/* Add Button */}
-            <div  className={styles['workout__add-exercise-button']}>
+            <div className={styles['workout__add-exercise-button']}>
                 <Button title="Add Exercise">
                     <SvgAddButton width={13} color={'#A0A8B1'} />
                 </Button>
