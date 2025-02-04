@@ -8,6 +8,10 @@ import styles from './index.module.css';
 import { WorkoutsInDayBaseModel } from '../../models/workout-date.model';
 import { DateHelper } from '../../../../helpers';
 
+// Refer to: https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/Sortable/Customization/MaterialBlueLight/
+import { Sortable, SortableTypes } from 'devextreme-react/sortable';
+
+
 interface IWorkoutDayContainerProps extends ICommonProps {
     day: string;
     date: string; // isoString
