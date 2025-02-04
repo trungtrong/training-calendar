@@ -16,6 +16,12 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     line-height: 20px;
