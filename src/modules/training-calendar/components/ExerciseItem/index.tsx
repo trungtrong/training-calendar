@@ -7,7 +7,6 @@ interface IExerciseItemProps extends ICommonProps {
     exercise: ExerciseViewModel;
 }
 
-
 const ExerciseItem = (props: IExerciseItemProps) => {
     const { exercise } = props;
 

@@ -26,13 +26,30 @@
     text-transform: uppercase;
 }
 
-.workout__exercise-list {
-    display: flex;
-    flex-direction: column;
-    gap: 3.95px;
-}
-
 .workout__add-exercise-button {
     display: flex;
     justify-content: end;
+    padding-top: 4.93px;
+}
+
+.exercise-list__sortable-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 3.95px;
+
+    &[data-is-empty="true"]::after {
+        display: block;
+        content: "Empty Exercise";
+        height: 42.78px;
+        padding: 4.93px 8px;
+        background: #95A6B7;
+        border-radius: 3px;
+        border: 1px solid #DFDFDF;
+        box-shadow: 0px 0px 4px 0px #0000001A;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        opacity: 0.4;
+    }
 }

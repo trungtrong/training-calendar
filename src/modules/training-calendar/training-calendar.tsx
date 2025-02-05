@@ -3,6 +3,8 @@ import { WorkoutsInDayColumn } from './components';
 import { DAYS } from './constants';
 import {
     DayModel,
+    ExerciseViewModel,
+    WorkoutByDayModel,
     WorkoutDaysViewModel,
     WorkoutsInDayViewModel,
     WorkoutViewModel,
@@ -50,8 +52,8 @@ const TrainingCalendar = () => {
         setIsInit(true);
     }, []);
 
-    //#region Reorder
-    const handleWorkoutDropped = useCallback(
+    //#region Drag, Drop Workout
+    const handleWorkoutDroppedToAnotherDay = useCallback(
         (params: {
             fromDay: DayModel;
             toDay: DayModel;
@@ -110,6 +112,67 @@ const TrainingCalendar = () => {
     );
     //#endregion
 
+    //#region Drag, Drop Exercise
+    const onExerciseDroppedToAnotherWorkout = useCallback(
+        (params: {
+            fromWorkout: WorkoutByDayModel;
+            toWorkout: WorkoutByDayModel;
+            fromIndex: number;
+            toIndex: number;
+        }) => {
+            const fromWorkout = params.fromWorkout;
+            const toWorkout = params.toWorkout;
+            //
+            const workoutsInOldDayColumn =
+                workoutDaysDataSource[fromWorkout.dayName].workouts;
+            const workoutsInNewDayColumn =
+                workoutDaysDataSource[toWorkout.dayName].workouts;
+            // Get Workout in new day column
+            const workoutInOldDayIndex = workoutsInOldDayColumn.findIndex(
+                (workout) => workout.id === fromWorkout.workoutId
+            );
+            const workoutInOldDay =
+                workoutsInOldDayColumn[workoutInOldDayIndex];
+            // Remove exercise item of workout in old Day column
+            const {
+                removedItem: removedExerciseInOldDay,
+                newDataSource: newExercisesInOldDay,
+            } = KanbanHelper.removeItem<ExerciseViewModel>({
+                dataSource: workoutInOldDay.exercises,
+                removedIndex: params.fromIndex,
+            });
+            workoutDaysDataSource[fromWorkout.dayName].workouts[
+                workoutInOldDayIndex
+            ].exercises = newExercisesInOldDay;
+
+            // Get Workout in new day column
+            const workoutInNewDayIndex = workoutsInNewDayColumn.findIndex(
+                (workout) => workout.id === toWorkout.workoutId
+            );
+            const workoutInNewDay =
+                workoutsInNewDayColumn[workoutInNewDayIndex];
+            // Insert exercise item in new Day column
+            const { newDataSource: newExercisesInNewDay } =
+                KanbanHelper.insertItem<ExerciseViewModel>({
+                    dataSource: workoutInNewDay.exercises,
+                    newItem: removedExerciseInOldDay,
+                    toIndex: params.toIndex,
+                });
+            workoutDaysDataSource[toWorkout.dayName].workouts[
+                workoutInNewDayIndex
+            ].exercises = newExercisesInNewDay;
+            //
+            setWorkoutDaysDataSource(structuredClone(workoutDaysDataSource));
+            setWorkoutDaysDataSourceCloned(
+                structuredClone(workoutDaysDataSource)
+            );
+        },
+        [workoutDaysDataSource]
+    );
+
+    const onExerciseReorderedOnSameWorkout = useCallback(() => {}, []);
+    //#endregion
+
     return (
         <div className={styles['training-calendar-wrapper']}>
             <div className={styles['training-calendar-kanban-container']}>
@@ -120,8 +183,14 @@ const TrainingCalendar = () => {
                         workoutsInDay={workoutDaysDataSource[dayName]}
                         dayName={dayName}
                         date={workoutDaysDataSource[dayName]?.date}
-                        onDropped={handleWorkoutDropped}
-                        onReordered={handleWorkoutReordered}
+                        onDroppedToAnotherDay={handleWorkoutDroppedToAnotherDay}
+                        onReorderedOnSameDay={handleWorkoutReordered}
+                        onExerciseDroppedToAnotherWorkout={
+                            onExerciseDroppedToAnotherWorkout
+                        }
+                        onExerciseReorderedOnSameWorkout={
+                            onExerciseReorderedOnSameWorkout
+                        }
                     />
                 ))}
             </div>

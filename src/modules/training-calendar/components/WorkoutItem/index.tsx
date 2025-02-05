@@ -1,17 +1,83 @@
+import { Sortable } from 'devextreme-react';
+import { AddEvent, ReorderEvent } from 'devextreme/ui/sortable';
+//
 import { Button } from '../../../../theme/components';
 import styles from './index.module.css';
 import { SvgThreeDots, SvgAddButton } from '../../../../assets/svg-icons';
 import ExerciseItem from '../ExerciseItem';
-import { memo } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { ICommonProps } from '../../../../shared/models';
-import { WorkoutViewModel } from '../../models';
+import { WorkoutByDayModel, WorkoutViewModel } from '../../models';
 
 interface IWorkoutItemProps extends ICommonProps {
+    dayName: string;
+    date: string;
     workout: WorkoutViewModel;
+    onDroppedToAnotherWorkout: (params: {
+        fromWorkout: WorkoutByDayModel;
+        toWorkout: WorkoutByDayModel;
+        fromIndex: number;
+        toIndex: number;
+    }) => void;
+    onReorderedOnSameWorkout: (params: {
+        workout: WorkoutByDayModel;
+        fromIndex: number;
+        toIndex: number;
+    }) => void;
 }
 
 const WorkoutItem = (props: IWorkoutItemProps) => {
-    const { workout } = props;
+    const { dayName, date, workout, onDroppedToAnotherWorkout, onReorderedOnSameWorkout } = props;
+    const [workoutCloned, setWorkoutCloned] = useState(workout);
+
+    useEffect(() => {
+        setWorkoutCloned(() => {
+            return structuredClone(workout);
+        });
+    }, [workout]);
+
+    //#region Sortable
+    const handleExerciseReordered = useCallback((params: ReorderEvent) => {
+        const fromData = params.fromData as WorkoutByDayModel;
+        const toData = params.toData as WorkoutByDayModel;
+        // Check same fromDa and ToData -> ignore
+        if (
+            !params ||
+            !fromData ||
+            !toData ||
+            params.fromIndex < 0 ||
+            params.toIndex < 0
+        ) {
+            return;
+        }
+        // Check if it doesn't reorder or just order on its own position
+        if (
+            fromData.date !== toData.date ||
+            params.fromIndex === params.toIndex
+        ) {
+            return;
+        }
+    }, []);
+
+    const handleExerciseDropped = useCallback((params: AddEvent) => {
+        if (
+            !params ||
+            !params.fromData ||
+            !params.toData ||
+            params.fromIndex < 0 ||
+            params.toIndex < 0
+        ) {
+            return;
+        }
+        //
+        onDroppedToAnotherWorkout({
+            fromWorkout: params.fromData as WorkoutByDayModel,
+            toWorkout: params.toData as WorkoutByDayModel,
+            fromIndex: params.fromIndex,
+            toIndex: params.toIndex,
+        });
+    }, [onDroppedToAnotherWorkout]);
+    //#endregion
 
     return (
         <div className={styles['workout-wrapper']}>
@@ -19,9 +85,9 @@ const WorkoutItem = (props: IWorkoutItemProps) => {
             <div className={styles['workout-header']}>
                 <div
                     className={`${styles['workout-name']} truncate`}
-                    title={workout.name}
+                    title={workoutCloned.name}
                 >
-                    {workout.name}
+                    {workoutCloned.name}
                 </div>
                 {/* 3 dots button */}
                 <Button title="Edit Workout">
@@ -30,18 +96,33 @@ const WorkoutItem = (props: IWorkoutItemProps) => {
             </div>
             {/* Exercises */}
             <div className={styles['workout__exercise-list']}>
-                {workout?.exercises?.length > 0 ? (
-                    workout.exercises.map((exercise) => {
-                        return (
-                            <ExerciseItem
-                                key={exercise.id}
-                                exercise={exercise}
-                            ></ExerciseItem>
-                        );
-                    })
-                ) : (
-                    <></>
-                )}
+                <Sortable
+                    className={`${styles['exercise-list__sortable-wrapper']}`}
+                    elementAttr={{
+                        'data-is-empty': !workoutCloned?.exercises?.length
+                    }}
+                    group="exercisesGroup"
+                    data={{
+                        date: date,
+                        dayName: dayName,
+                        workoutId: workoutCloned?.id,
+                    }}
+                    onReorder={handleExerciseReordered}
+                    onAdd={handleExerciseDropped}
+                >
+                    {workoutCloned?.exercises?.length > 0 ? (
+                        workoutCloned.exercises.map((exercise) => {
+                            return (
+                                <ExerciseItem
+                                    key={exercise.id}
+                                    exercise={exercise}
+                                ></ExerciseItem>
+                            );
+                        })
+                    ) : (
+                        <></>
+                    )}
+                </Sortable>
             </div>
 
             {/* Add Button */}

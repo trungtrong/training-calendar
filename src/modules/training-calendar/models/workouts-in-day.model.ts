@@ -1,4 +1,3 @@
-import { DaysEnum } from '../enums/days.constant';
 import { WorkoutViewModel } from './workout.model';
 
 export class WorkoutDaysViewModel {
@@ -25,15 +24,6 @@ export class WorkoutsInDayViewModel extends WorkoutsInDayBaseModel {
 
     constructor(init?: Partial<WorkoutsInDayViewModel>) {
         super();
-        Object.assign(this, init);
-    }
-}
-
-export class DayModel {
-    date!: string; // isoString
-    dayName!: DaysEnum;
-
-    constructor(init?: Partial<DayModel>) {
         Object.assign(this, init);
     }
 }
