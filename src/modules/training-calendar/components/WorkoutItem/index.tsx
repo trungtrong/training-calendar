@@ -112,6 +112,7 @@ const WorkoutItem = (props: IWorkoutItemProps) => {
                         dayName: dayName,
                         workoutId: workoutCloned?.id,
                     }}
+                    dropFeedbackMode={'indicate'}
                     onReorder={handleExerciseReordered}
                     onAdd={handleExerciseDropped}
                 >

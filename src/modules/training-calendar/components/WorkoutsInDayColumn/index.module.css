@@ -1,9 +1,17 @@
 .kanban-column-container {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: max-content 1fr;
+    grid-template-rows: max-content 100%;
     gap: 9px;
     min-width: 179px;
+
+    &:first-child {
+        margin-left: 63.5px;
+    }
+
+    &:last-child {
+        margin-right: 63.5px;
+    }
 }
 
 .kanban-column__day {
@@ -11,7 +19,6 @@
     font-weight: 600;
     line-height: 13.62px;
     text-align: left;
-    /* TODO: Make it as variables */
     color: #6A7988;
     text-transform: uppercase;
 }

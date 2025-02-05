@@ -143,7 +143,6 @@ const WorkoutsInDayColumn = (props: IWorkoutsInDayColumnProps) => {
     //#endregion
 
     return (
-        // TODO: handle with isInit
         <div className={styles['kanban-column-container']}>
             {/* Day Name */}
             <div className={`${styles['kanban-column__day']} truncate`}>
@@ -174,6 +173,7 @@ const WorkoutsInDayColumn = (props: IWorkoutsInDayColumnProps) => {
                             date: date,
                             dayName: dayName,
                         }}
+                        dropFeedbackMode={'indicate'}
                         onReorder={handleWorkoutReorderedOnSameDay}
                         onAdd={handleWorkoutDroppedToAnotherDay}
                     >
