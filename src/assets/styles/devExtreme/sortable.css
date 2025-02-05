@@ -1,3 +1,7 @@
+.dx-sortable {
+    overflow: auto;
+}
+
 .dx-sortable .dx-sortable-source {
     opacity: 0.5;
 }
