@@ -1,5 +1,6 @@
 @import './variables.css';
 @import './components';
+@import './devExtreme';
 
 :root {
     font-family: "Open Sans", system-ui, Avenir, Helvetica, Arial, sans-serif;

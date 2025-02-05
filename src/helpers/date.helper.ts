@@ -2,8 +2,8 @@ import { DaysEnum } from '../modules/training-calendar/enums/days.constant';
 
 export class DateHelper {
   static getDaysInCurrentWeek(currentDate = new Date()): {
-    daysInWeek: Date[];
-    daysInWeekWithIosString: string[]
+    datesInWeek: Date[];
+    datesInWeekWithIosString: string[]
   } {
     const today = new Date(currentDate);
     const dayOfWeek = today.getDay(); // 0 - 6 = Sunday - Saturday
@@ -12,21 +12,21 @@ export class DateHelper {
     const startOfWeek = new Date(today);
     startOfWeek.setDate(today.getDate() - dayOfWeek);
 
-    const daysInWeek: Date[] = [];
-    const daysInWeekWithIosString: string[] = [];
+    const datesInWeek: Date[] = [];
+    const datesInWeekWithIosString: string[] = [];
 
     for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
       const currentDay = new Date(startOfWeek);
       currentDay.setDate(startOfWeek.getDate() + dayIndex);
       //
       const currentDate = new Date(currentDay);
-      daysInWeek.push(currentDate);
-      daysInWeekWithIosString.push(currentDate.toISOString());
+      datesInWeek.push(currentDate);
+      datesInWeekWithIosString.push(currentDate.toISOString());
     }
 
     return {
-      daysInWeek,
-      daysInWeekWithIosString
+      datesInWeek,
+      datesInWeekWithIosString
     };
   }
 

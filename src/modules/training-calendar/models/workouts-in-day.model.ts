@@ -9,7 +9,7 @@ export class WorkoutDaysViewModel {
 }
 
 export class WorkoutsInDayBaseModel {
-    date!: string;
+    date!: string; // isoString
     workouts!: WorkoutViewModel[];
 
     constructor(init?: Partial<WorkoutsInDayBaseModel>) {
@@ -19,11 +19,20 @@ export class WorkoutsInDayBaseModel {
 
 export class WorkoutsInDayViewModel extends WorkoutsInDayBaseModel {
     dayName!: string;
-    dayNumber!: number;
+    dayIndexInWeek!: number;
     workouts: WorkoutViewModel[] = [];
 
     constructor(init?: Partial<WorkoutsInDayViewModel>) {
         super();
+        Object.assign(this, init);
+    }
+}
+
+export class DayModel {
+    date!: string; // isoString
+    dayName!: string;
+
+    constructor(init?: Partial<DayModel>) {
         Object.assign(this, init);
     }
 }

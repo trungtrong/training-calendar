@@ -2,11 +2,17 @@ import { ExerciseViewModel, WorkoutViewModel } from '../models';
 import { WorkoutsInDayViewModel } from '../models';
 
 export class WorkoutListMock {
-    static generateWorkoutsInDay(params: { date: string, dateNumber: number }): WorkoutsInDayViewModel {
-        switch (params.dateNumber) {
+    static generateWorkoutsInDay(params: { 
+        date: string,
+        dayName: string;
+        dayIndexInWeek: number 
+    }): WorkoutsInDayViewModel {
+        switch (params.dayIndexInWeek) {
             case 2:
                 return new WorkoutsInDayViewModel({
                     date: params.date,
+                    dayName: params.dayName,
+                    dayIndexInWeek: params.dayIndexInWeek,
                     workouts: [
                         new WorkoutViewModel({
                             id: 'workout-0' + 'tue',
@@ -32,6 +38,8 @@ export class WorkoutListMock {
             case 3:
                 return new WorkoutsInDayViewModel({
                     date: params.date,
+                    dayName: params.dayName,
+                    dayIndexInWeek: params.dayIndexInWeek,
                     workouts: [
                         new WorkoutViewModel({
                             id: 'workout-1' + params.date,
@@ -76,6 +84,8 @@ export class WorkoutListMock {
             default:
                 return new WorkoutsInDayViewModel({
                     date: params.date,
+                    dayName: params.dayName,
+                    dayIndexInWeek: params.dayIndexInWeek,
                     workouts: []
                 });;
         }

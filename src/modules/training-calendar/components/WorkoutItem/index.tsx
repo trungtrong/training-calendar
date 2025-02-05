@@ -31,10 +31,10 @@ const WorkoutItem = (props: IWorkoutItemProps) => {
             {/* Exercises */}
             <div className={styles['workout__exercise-list']}>
                 {workout?.exercises?.length > 0 ? (
-                    workout.exercises.map((exercise, exerciseIndex) => {
+                    workout.exercises.map((exercise) => {
                         return (
                             <ExerciseItem
-                                key={exerciseIndex}
+                                key={exercise.id}
                                 exercise={exercise}
                             ></ExerciseItem>
                         );

@@ -17,6 +17,9 @@
 }
 
 .kanban-column__workout-list-container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: max-content 1fr;
     border-radius: 6px;
     background-color: #F3F5F8;
     opacity: 80.17%;
@@ -46,7 +49,8 @@
 .kanban-column__workout-list {
     overflow-y: auto;
     overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+}
+
+.kanban-column__sortable-wrapper {
+    height: 100%;
 }
