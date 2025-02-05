@@ -11,7 +11,6 @@ import { DateHelper } from '../../../../helpers';
 // Refer to: https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/Sortable/Customization/MaterialBlueLight/
 import { Sortable, SortableTypes } from 'devextreme-react/sortable';
 
-
 interface IWorkoutDayContainerProps extends ICommonProps {
     day: string;
     date: string; // isoString
@@ -30,12 +29,11 @@ const WorkoutDayContainer = (props: IWorkoutDayContainerProps) => {
         });
         //
         const currentDate = new Date();
-        const compareResult = DateHelper.compareDate({
-            firstDate: currentDate,
-            secondDate: new Date(date),
-        });
         setIsCurrentDate(() => {
-            return compareResult === 'equal';
+            return DateHelper.isSameDate({
+                firstDate: currentDate,
+                secondDate: new Date(date),
+            });
         });
     }, [date]);
 

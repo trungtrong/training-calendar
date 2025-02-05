@@ -89,4 +89,15 @@ export class DateHelper {
       return 'lessThan';
     }
   };
+
+  static isSameDate(params: {
+    firstDate: Date | string | number;
+    secondDate: Date | string | number
+  }): boolean {
+    const compareResult = this.compareDate({
+      firstDate: params.firstDate,
+      secondDate: params.secondDate
+    });
+    return compareResult === 'equal';
+  };
 }
