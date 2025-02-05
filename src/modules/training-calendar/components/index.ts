@@ -1,5 +1,5 @@
-import WorkoutDayContainer from './WorkoutDayContainer/index';
+import WorkoutsInDayColumn from './WorkoutsInDayColumn/index';
 
 export {
-    WorkoutDayContainer
+    WorkoutsInDayColumn
 }

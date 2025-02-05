@@ -1,5 +1,5 @@
 import styles from './index.module.css';
-import { WorkoutDayContainer } from './components';
+import { WorkoutsInDayColumn } from './components';
 import { DAYS } from './constants';
 import {
     WorkoutDaysViewModel,
@@ -52,7 +52,7 @@ const TrainingCalendar = () => {
             {/* Layout */}
             <div className={styles['training-calendar-kanban-container']}>
                 {DAYS.map((day, index) => (
-                    <WorkoutDayContainer
+                    <WorkoutsInDayColumn
                         key={index}
                         workoutsInDay={workoutDaysDataSource[day]}
                         day={day}

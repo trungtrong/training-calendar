@@ -11,13 +11,13 @@ import { DateHelper } from '../../../../helpers';
 // Refer to: https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/Sortable/Customization/MaterialBlueLight/
 import { Sortable, SortableTypes } from 'devextreme-react/sortable';
 
-interface IWorkoutDayContainerProps extends ICommonProps {
+interface IWorkoutsInDayColumnProps extends ICommonProps {
     day: string;
     date: string; // isoString
     workoutsInDay: WorkoutsInDayBaseModel;
 }
 
-const WorkoutDayContainer = (props: IWorkoutDayContainerProps) => {
+const WorkoutsInDayColumn = (props: IWorkoutsInDayColumnProps) => {
     const { day, date, workoutsInDay } = props;
 
     const [isCurrentDate, setIsCurrentDate] = useState(false);
@@ -79,4 +79,4 @@ const WorkoutDayContainer = (props: IWorkoutDayContainerProps) => {
     );
 };
 
-export default memo(WorkoutDayContainer);
+export default memo(WorkoutsInDayColumn);
