@@ -83,7 +83,28 @@ const TrainingCalendar = () => {
                 newWorkoutsInToDay;
             //
             setWorkoutDaysDataSource(structuredClone(workoutDaysDataSource));
-            setWorkoutDaysDataSourceCloned(structuredClone(workoutDaysDataSource));
+            setWorkoutDaysDataSourceCloned(
+                structuredClone(workoutDaysDataSource)
+            );
+        },
+        [workoutDaysDataSource]
+    );
+
+    const handleWorkoutReordered = useCallback(
+        (params: { day: DayModel; fromIndex: number; toIndex: number }) => {
+            const dayName: DaysEnum = params.day.dayName;
+            const { newDataSource: newWorkouts } =
+                KanbanHelper.reorderItem<WorkoutViewModel>({
+                    dataSource: workoutDaysDataSource[dayName].workouts,
+                    fromIndex: params.fromIndex,
+                    toIndex: params.toIndex,
+                });
+            workoutDaysDataSource[dayName].workouts = newWorkouts;
+            //
+            setWorkoutDaysDataSource(structuredClone(workoutDaysDataSource));
+            setWorkoutDaysDataSourceCloned(
+                structuredClone(workoutDaysDataSource)
+            );
         },
         [workoutDaysDataSource]
     );
@@ -100,6 +121,7 @@ const TrainingCalendar = () => {
                         dayName={dayName}
                         date={workoutDaysDataSource[dayName]?.date}
                         onDropped={handleWorkoutDropped}
+                        onReordered={handleWorkoutReordered}
                     />
                 ))}
             </div>

@@ -5,10 +5,7 @@ import { ICommonProps } from '../../../../shared/models';
 import { Button } from '../../../../theme/components';
 import WorkoutItem from '../WorkoutItem';
 import styles from './index.module.css';
-import {
-    DayModel,
-    WorkoutsInDayViewModel,
-} from '../../models';
+import { DayModel, WorkoutsInDayViewModel } from '../../models';
 import { DateHelper } from '../../../../helpers';
 
 // Refer to: https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/Sortable/Customization/MaterialBlueLight/
@@ -20,16 +17,23 @@ interface IWorkoutsInDayColumnProps extends ICommonProps {
     dayName: string;
     date: string;
     workoutsInDay: WorkoutsInDayViewModel;
+    //
     onDropped: (params: {
         fromDay: DayModel;
         toDay: DayModel;
         fromIndex: number;
         toIndex: number;
     }) => void;
+    onReordered: (params: {
+        day: DayModel;
+        fromIndex: number;
+        toIndex: number;
+    }) => void;
 }
 
 const WorkoutsInDayColumn = (props: IWorkoutsInDayColumnProps) => {
-    const { isInit, dayName, date, workoutsInDay, onDropped } = props;
+    const { isInit, dayName, date, workoutsInDay, onDropped, onReordered } =
+        props;
 
     const [workoutsInDayCloned, setWorkoutsInDayCloned] =
         useState(workoutsInDay);
@@ -61,21 +65,48 @@ const WorkoutsInDayColumn = (props: IWorkoutsInDayColumnProps) => {
     //#endregion
 
     //#region Sortable
-    const handleWorkoutReordered = useCallback(
-        ({ fromData, toData, fromIndex, toIndex }: ReorderEvent) => {
+    const handleWorkoutReorderedOnSameDay = useCallback(
+        (params: ReorderEvent) => {
+            console.log(params);
+            
+            const fromData = params.fromData as DayModel;
+            const toData = params.toData as DayModel;
             // Check same fromDa and ToData -> ignore
+            if (!params || !fromData || !toData
+                || params.fromIndex < 0 || params.toIndex < 0
+            ) {
+                return;
+            }
+            // Check if it doesn't reorder or just order on its own position
+            if (fromData.date !== toData.date
+                || params.fromIndex === params.toIndex
+            ) {
+                return;
+            }
+            //
+            onReordered({
+                day: fromData,
+                fromIndex: params.fromIndex,
+                toIndex: params.toIndex,
+            })
         },
-        []
+        [onReordered]
     );
 
     const handleWorkoutDropped = useCallback(
         (params: AddEvent) => {
+            if (!params || !params.fromData || !params.toData
+                || params.fromIndex < 0 || params.toIndex < 0
+            ) {
+                return;
+            }
+            //
             onDropped({
                 fromDay: params.fromData as DayModel,
                 toDay: params.toData as DayModel,
                 fromIndex: params.fromIndex,
                 toIndex: params.toIndex,
-            })
+            });
         },
         [onDropped]
     );
@@ -114,7 +145,7 @@ const WorkoutsInDayColumn = (props: IWorkoutsInDayColumnProps) => {
                             dayName: dayName,
                         }}
                         // handle=".workout-header"
-                        onReorder={handleWorkoutReordered}
+                        onReorder={handleWorkoutReorderedOnSameDay}
                         onAdd={handleWorkoutDropped}
                     >
                         {workoutsInDayCloned?.workouts?.length > 0 ? (
