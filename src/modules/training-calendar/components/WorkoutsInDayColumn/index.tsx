@@ -5,7 +5,7 @@ import { ICommonProps } from '../../../../shared/models';
 import { Button } from '../../../../theme/components';
 import WorkoutItem from '../WorkoutItem';
 import styles from './index.module.css';
-import { WorkoutsInDayBaseModel } from '../../models/workout-date.model';
+import { WorkoutsInDayBaseModel } from '../../models';
 import { DateHelper } from '../../../../helpers';
 
 // Refer to: https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/Sortable/Customization/MaterialBlueLight/

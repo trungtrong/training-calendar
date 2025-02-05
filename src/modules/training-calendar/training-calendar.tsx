@@ -4,7 +4,7 @@ import { DAYS } from './constants';
 import {
     WorkoutDaysViewModel,
     WorkoutsInDayViewModel,
-} from './models/workout-date.model';
+} from './models';
 import { DaysEnum } from './enums/days.constant';
 import { useEffect, useState } from 'react';
 import { DateHelper } from '../../helpers';

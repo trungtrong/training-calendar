@@ -1,5 +1,5 @@
 import { ExerciseViewModel, WorkoutViewModel } from '../models';
-import { WorkoutsInDayViewModel } from '../models/workout-date.model';
+import { WorkoutsInDayViewModel } from '../models';
 
 export class WorkoutListMock {
     static generateWorkoutsInDay(params: { date: string, dateNumber: number }): WorkoutsInDayViewModel {
