@@ -30,9 +30,6 @@ const TrainingCalendar = () => {
                 [DaysEnum.Sun]: new WorkoutsInDayViewModel(),
             })
         );
-    const [workoutDaysDataSourceCloned, setWorkoutDaysDataSourceCloned] =
-        useState<WorkoutDaysViewModel>(structuredClone(workoutDaysDataSource));
-
     useEffect(() => {
         const { datesInWeekWithIosString } = DateHelper.getDaysInCurrentWeek();
         const workoutDays = new WorkoutDaysViewModel(
@@ -48,7 +45,6 @@ const TrainingCalendar = () => {
             });
         });
         setWorkoutDaysDataSource(workoutDays);
-        setWorkoutDaysDataSourceCloned(structuredClone(workoutDays));
         setIsInit(true);
     }, []);
 
@@ -85,9 +81,6 @@ const TrainingCalendar = () => {
                 newWorkoutsInToDay;
             //
             setWorkoutDaysDataSource(structuredClone(workoutDaysDataSource));
-            setWorkoutDaysDataSourceCloned(
-                structuredClone(workoutDaysDataSource)
-            );
         },
         [workoutDaysDataSource]
     );
@@ -104,9 +97,6 @@ const TrainingCalendar = () => {
             workoutDaysDataSource[dayName].workouts = newWorkouts;
             //
             setWorkoutDaysDataSource(structuredClone(workoutDaysDataSource));
-            setWorkoutDaysDataSourceCloned(
-                structuredClone(workoutDaysDataSource)
-            );
         },
         [workoutDaysDataSource]
     );
@@ -163,14 +153,37 @@ const TrainingCalendar = () => {
             ].exercises = newExercisesInNewDay;
             //
             setWorkoutDaysDataSource(structuredClone(workoutDaysDataSource));
-            setWorkoutDaysDataSourceCloned(
-                structuredClone(workoutDaysDataSource)
-            );
         },
         [workoutDaysDataSource]
     );
 
-    const onExerciseReorderedOnSameWorkout = useCallback(() => {}, []);
+    const onExerciseReorderedOnSameWorkout = useCallback(
+        (params: {
+            workout: WorkoutByDayModel;
+            fromIndex: number;
+            toIndex: number;
+        }) => {
+            const dayName: DaysEnum = params.workout.dayName;
+            //
+            const workouts = workoutDaysDataSource[dayName].workouts;
+            const workoutIndex = workouts.findIndex(
+                (workout) => workout.id === params.workout.workoutId
+            );
+            const workout = workouts[workoutIndex];
+            //
+            const { newDataSource: newExercises } =
+                KanbanHelper.reorderItem<ExerciseViewModel>({
+                    dataSource: workout.exercises,
+                    fromIndex: params.fromIndex,
+                    toIndex: params.toIndex,
+                });
+            workoutDaysDataSource[dayName].workouts[workoutIndex].exercises =
+                newExercises;
+            //
+            setWorkoutDaysDataSource(structuredClone(workoutDaysDataSource));
+        },
+        [workoutDaysDataSource]
+    );
     //#endregion
 
     return (

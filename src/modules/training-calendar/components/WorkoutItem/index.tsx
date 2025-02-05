@@ -57,6 +57,11 @@ const WorkoutItem = (props: IWorkoutItemProps) => {
         ) {
             return;
         }
+        onReorderedOnSameWorkout({
+            workout: fromData,
+            fromIndex: params.fromIndex,
+            toIndex: params.toIndex,
+        })
     }, []);
 
     const handleExerciseDropped = useCallback((params: AddEvent) => {
