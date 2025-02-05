@@ -1,5 +1,9 @@
 // TODO: Fix Path issue
 import { memo, useCallback, useEffect, useState } from 'react';
+// Refer to: https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/Sortable/Customization/MaterialBlueLight/
+import { Sortable } from 'devextreme-react/sortable';
+import { AddEvent, ReorderEvent } from 'devextreme/ui/sortable';
+//
 import { SvgAddButton } from '../../../../assets/svg-icons';
 import { ICommonProps } from '../../../../shared/models';
 import { Button } from '../../../../theme/components';
@@ -12,9 +16,6 @@ import {
 } from '../../models';
 import { DateHelper } from '../../../../helpers';
 
-// Refer to: https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/Sortable/Customization/MaterialBlueLight/
-import { Sortable } from 'devextreme-react/sortable';
-import { AddEvent, ReorderEvent } from 'devextreme/ui/sortable';
 
 interface IWorkoutsInDayColumnProps extends ICommonProps {
     isInit: boolean;
@@ -59,9 +60,9 @@ const WorkoutsInDayColumn = (props: IWorkoutsInDayColumnProps) => {
     } = props;
 
     const [workoutsInDayCloned, setWorkoutsInDayCloned] =
-        useState(workoutsInDay);
+        useState(workoutsInDay ?? []);
     const [isCurrentDate, setIsCurrentDate] = useState(false);
-    const [dateNumber, setDateNumber] = useState(0);
+    const [dateNumber, setDateNumber] = useState<number>(0);
 
     //#region Init Data
     useEffect(() => {
@@ -73,6 +74,10 @@ const WorkoutsInDayColumn = (props: IWorkoutsInDayColumnProps) => {
     }, [workoutsInDay, isInit]);
 
     useEffect(() => {
+        if (!date) {
+            return;
+        }
+        //
         setDateNumber(() => {
             return new Date(date).getDate();
         });
@@ -144,16 +149,14 @@ const WorkoutsInDayColumn = (props: IWorkoutsInDayColumnProps) => {
 
     return (
         <div className={styles['kanban-column-container']}>
-            {/* Day Name */}
             <div className={`${styles['kanban-column__day']} truncate`}>
-                {dayName}
+                {dayName ?? '-'}
             </div>
             {/* Kanban Column */}
             <div className={styles['kanban-column__workout-list-container']}>
                 <div className={styles['workout-list__header']}>
-                    {/* TODO: Fix title for date */}
                     <div
-                        className={`${styles['kanban-column__date']} truncate `}
+                        className={`${styles['kanban-column__date']} truncate`}
                         data-current-date={isCurrentDate}
                         title={date ?? null}
                     >
@@ -170,18 +173,18 @@ const WorkoutsInDayColumn = (props: IWorkoutsInDayColumnProps) => {
                         className={styles['kanban-column__sortable-wrapper']}
                         group="workoutsGroup"
                         data={{
-                            date: date,
-                            dayName: dayName,
+                            date: date ?? null,
+                            dayName: dayName ?? null,
                         }}
                         dropFeedbackMode={'indicate'}
                         onReorder={handleWorkoutReorderedOnSameDay}
                         onAdd={handleWorkoutDroppedToAnotherDay}
                     >
                         {workoutsInDayCloned?.workouts?.length > 0 ? (
-                            workoutsInDayCloned?.workouts.map((workout) => {
+                            workoutsInDayCloned.workouts.map((workout, index) => {
                                 return (
                                     <WorkoutItem
-                                        key={workout.id}
+                                        key={workout.id ?? index}
                                         workout={workout}
                                         dayName={dayName}
                                         date={date}

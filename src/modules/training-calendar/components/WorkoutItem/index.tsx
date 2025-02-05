@@ -28,7 +28,7 @@ interface IWorkoutItemProps extends ICommonProps {
 
 const WorkoutItem = (props: IWorkoutItemProps) => {
     const { dayName, date, workout, onDroppedToAnotherWorkout, onReorderedOnSameWorkout } = props;
-    const [workoutCloned, setWorkoutCloned] = useState(workout);
+    const [workoutCloned, setWorkoutCloned] = useState(workout ?? new WorkoutViewModel());
 
     useEffect(() => {
         setWorkoutCloned(() => {
@@ -90,9 +90,9 @@ const WorkoutItem = (props: IWorkoutItemProps) => {
             <div className={styles['workout-header']}>
                 <div
                     className={`${styles['workout-name']} truncate`}
-                    title={workoutCloned.name}
+                    title={workoutCloned?.name ?? '-'}
                 >
-                    {workoutCloned.name}
+                    {workoutCloned?.name ?? '-'}
                 </div>
                 {/* 3 dots button */}
                 <Button title="Edit Workout">
