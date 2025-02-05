@@ -46,10 +46,11 @@ const WorkoutDayContainer = (props: IWorkoutDayContainerProps) => {
             {/* Kanban Column */}
             <div className={styles['kanban-column__workout-list-container']}>
                 <div className={styles['workout-list__header']}>
-                    {/* TODO: Add title for date */}
+                    {/* TODO: Fix title for date */}
                     <div
                         className={`${styles['kanban-column__date']} truncate `}
                         data-current-date={isCurrentDate}
+                        title={date ?? null}
                     >
                         {dateNumber ?? '-'}
                     </div>

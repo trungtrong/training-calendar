@@ -6,7 +6,7 @@
 
 .training-calendar-kanban-container {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 100%;
     height: 100%;
     gap: 10px;
