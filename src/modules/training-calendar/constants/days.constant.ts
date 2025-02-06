@@ -1,4 +1,4 @@
-import { DaysEnum } from '../enums/days.constant';
+import { DaysEnum } from '../enums';
 
 export const DAYS = [
     DaysEnum.Mon,

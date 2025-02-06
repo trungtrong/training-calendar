@@ -9,10 +9,10 @@ import {
     WorkoutsInDayViewModel,
     WorkoutViewModel,
 } from './models';
-import { DaysEnum } from './enums/days.constant';
+import { DaysEnum } from './enums';
 import { useCallback, useEffect, useState } from 'react';
 import { DateHelper } from '../../helpers';
-import { WorkoutListMock } from './mock/workout-list.helper';
+import { WorkoutListMock } from './mock';
 import { KanbanHelper } from './helpers';
 
 const TrainingCalendar = () => {

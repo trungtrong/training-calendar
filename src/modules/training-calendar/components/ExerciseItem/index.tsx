@@ -1,7 +1,8 @@
 import { memo } from 'react';
+//
 import styles from './index.module.css';
 import { ExerciseViewModel } from '../../models';
-import { ICommonProps } from '../../../../shared/models';
+import { ICommonProps } from '@/shared/models';
 
 interface IExerciseItemProps extends ICommonProps {
     exercise: ExerciseViewModel;

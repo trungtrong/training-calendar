@@ -1,13 +1,14 @@
+import { BaseModel } from '@/shared/models';
 import { DayModel } from './day.model';
 import { ExerciseViewModel } from './exercise.model';
 
-export class WorkoutBaseModel {
-    id?: string;
+export class WorkoutBaseModel extends BaseModel {
     name?: string;
     date!: string;
     exercises?: ExerciseViewModel[];
 
     constructor(init?: Partial<WorkoutBaseModel>) {
+        super();
         Object.assign(this, init);
     }
 }

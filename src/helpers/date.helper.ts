@@ -1,4 +1,4 @@
-import { DaysEnum } from '../modules/training-calendar/enums/days.constant';
+import { DaysEnum } from '../modules/training-calendar/enums';
 
 export class DateHelper {
   static getDaysInCurrentWeek(currentDate = new Date()): {
@@ -100,4 +100,29 @@ export class DateHelper {
     });
     return compareResult === 'equal';
   };
+
+  static toFormatDate(params: {
+    value: Date | string,
+    format?: string
+  }): string {
+    if (!params || !params.value) {
+      return '-';
+    }
+    const valueDate = new Date(params.value);
+    const date: number = valueDate.getDate();
+    const month: number = valueDate.getMonth() + 1;
+    const year: number = valueDate.getFullYear();
+
+    switch (params.format) {
+      case 'MM/dd/yyyy':
+        return `${month > 9 ? month : '0' + month}/${date > 9 ? date : '0' + date}/${year}`;
+      case 'yyyy/MM/dd':
+        return `${year}/${month > 9 ? month : '0' + month}/${date > 9 ? date : '0' + date}`;
+      case 'yyyy-MM-dd':
+        return `${year}-${month > 9 ? month : '0' + month}-${date > 9 ? date : '0' + date}`;
+      case 'dd/MM/yyyy':
+      default:
+        return `${date > 9 ? date : '0' + date}/${month > 9 ? month : '0' + month}/${year}`;
+    }
+  }
 }

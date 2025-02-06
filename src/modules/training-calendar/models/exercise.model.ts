@@ -1,10 +1,12 @@
-export class ExerciseBaseModel {
-    id!: string;
+import { BaseModel } from '@/shared/models';
+
+export class ExerciseBaseModel extends BaseModel {
     name!: string;
     numberOfSet!: number;
     info!: string;
 
     constructor(init?: Partial<ExerciseBaseModel>) {
+        super();
         Object.assign(this, init);
     }
 }

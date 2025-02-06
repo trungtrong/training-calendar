@@ -18,20 +18,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
-    // Path aliases
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@/public/*": [
-        "./public/*"
-      ],
-      "@/assets/*": [
-        "./src/assets/*"
-      ],
-    },
+    "noUncheckedSideEffectImports": true
   },
   "include": ["vite.config.ts"]
 }

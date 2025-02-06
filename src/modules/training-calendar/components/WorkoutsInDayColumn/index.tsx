@@ -1,12 +1,12 @@
-// TODO: Fix Path issue
 import { memo, useCallback, useEffect, useState } from 'react';
 // Refer to: https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/Sortable/Customization/MaterialBlueLight/
 import { Sortable } from 'devextreme-react/sortable';
 import { AddEvent, ReorderEvent } from 'devextreme/ui/sortable';
 //
-import { SvgAddButton } from '../../../../assets/svg-icons';
-import { ICommonProps } from '../../../../shared/models';
-import { Button } from '../../../../theme/components';
+import { SvgAddButton } from '@/assets/svg-icons';
+import { ICommonProps } from '@/shared/models';
+import { Button } from '@/theme/components';
+import { DateHelper } from '@/helpers';
 import WorkoutItem from '../WorkoutItem';
 import styles from './index.module.css';
 import {
@@ -14,8 +14,6 @@ import {
     WorkoutByDayModel,
     WorkoutsInDayViewModel,
 } from '../../models';
-import { DateHelper } from '../../../../helpers';
-
 
 interface IWorkoutsInDayColumnProps extends ICommonProps {
     isInit: boolean;
@@ -63,6 +61,7 @@ const WorkoutsInDayColumn = (props: IWorkoutsInDayColumnProps) => {
         useState(workoutsInDay ?? []);
     const [isCurrentDate, setIsCurrentDate] = useState(false);
     const [dateNumber, setDateNumber] = useState<number>(0);
+    const [dateFormat, setDateFormat] = useState<string>('-');
 
     //#region Init Data
     useEffect(() => {
@@ -89,6 +88,8 @@ const WorkoutsInDayColumn = (props: IWorkoutsInDayColumnProps) => {
                 secondDate: new Date(date),
             });
         });
+        //
+        setDateFormat(DateHelper.toFormatDate({value: date}))
     }, [date]);
     //#endregion
 
@@ -158,7 +159,7 @@ const WorkoutsInDayColumn = (props: IWorkoutsInDayColumnProps) => {
                     <div
                         className={`${styles['kanban-column__date']} truncate`}
                         data-current-date={isCurrentDate}
-                        title={date ?? null}
+                        title={dateFormat}
                     >
                         {dateNumber ?? '-'}
                     </div>

@@ -1,4 +1,4 @@
-import { DaysEnum } from '../enums/days.constant';
+import { DaysEnum } from '../enums';
 
 export class DayModel {
     date!: string; // isoString

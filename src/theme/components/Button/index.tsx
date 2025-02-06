@@ -1,7 +1,7 @@
 import type { MouseEvent } from 'react';
 import { forwardRef } from 'react';
 
-import { ICommonProps } from '../../../shared/models';
+import { ICommonProps } from '@/shared/models';
 import styles from './index.module.css';
 
 export interface ButtonProps extends ICommonProps {

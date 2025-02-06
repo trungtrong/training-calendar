@@ -1,12 +1,12 @@
+import { memo, useCallback, useEffect, useState } from 'react';
 import { Sortable } from 'devextreme-react';
 import { AddEvent, ReorderEvent } from 'devextreme/ui/sortable';
 //
-import { Button } from '../../../../theme/components';
+import { Button } from '@/theme/components';
 import styles from './index.module.css';
-import { SvgThreeDots, SvgAddButton } from '../../../../assets/svg-icons';
+import { SvgThreeDots, SvgAddButton } from '@/assets/svg-icons';
 import ExerciseItem from '../ExerciseItem';
-import { memo, useCallback, useEffect, useState } from 'react';
-import { ICommonProps } from '../../../../shared/models';
+import { ICommonProps } from '@/shared/models';
 import { WorkoutByDayModel, WorkoutViewModel } from '../../models';
 
 interface IWorkoutItemProps extends ICommonProps {
