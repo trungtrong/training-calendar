@@ -36,9 +36,8 @@ const TrainingCalendar = () => {
             structuredClone(workoutDaysDataSource)
         );
         datesInWeekWithIosString.forEach((date, dayIndexInWeek) => {
-            const dayName: DaysEnum =
-                DateHelper.convertDayNumberToDayName(dayIndexInWeek);
-            workoutDays[dayName] = WorkoutListMock.generateWorkoutsInDay({
+            const dayName = DAYS[dayIndexInWeek];
+            workoutDays[DAYS[dayIndexInWeek]] = WorkoutListMock.generateWorkoutsInDay({
                 date: date,
                 dayName: dayName,
                 dayIndexInWeek: dayIndexInWeek,

@@ -1,5 +1,3 @@
-import { DaysEnum } from '../modules/training-calendar/enums';
-
 export class DateHelper {
   static getDaysInCurrentWeek(currentDate = new Date()): {
     datesInWeek: Date[];
@@ -10,11 +8,20 @@ export class DateHelper {
 
     // Calculate the start of the week (Sunday)
     const startOfWeek = new Date(today);
-    startOfWeek.setDate(today.getDate() - dayOfWeek);
-
+    switch (dayOfWeek) {
+      case 0: // Sunday
+        startOfWeek.setDate(today.getDate() - 6);
+        break;
+      case 1:  // Monday
+        break;
+      default:
+        startOfWeek.setDate(today.getDate() - dayOfWeek + 1);
+        break;
+    }
+    //
     const datesInWeek: Date[] = [];
     const datesInWeekWithIosString: string[] = [];
-
+    // index = 0 - Monday, 6 - Sunday
     for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
       const currentDay = new Date(startOfWeek);
       currentDay.setDate(startOfWeek.getDate() + dayIndex);
@@ -28,46 +35,6 @@ export class DateHelper {
       datesInWeek,
       datesInWeekWithIosString
     };
-  }
-
-  static convertDayNameToDayNumber(dayName: DaysEnum): number {
-    switch (dayName) {
-      case DaysEnum.Mon:
-        return 1;
-      case DaysEnum.Tue:
-        return 2;
-      case DaysEnum.Wed:
-        return 3;
-      case DaysEnum.Thu:
-        return 4;
-      case DaysEnum.Fri:
-        return 5;
-      case DaysEnum.Sat:
-        return 6;
-      case DaysEnum.Sun:
-      default:
-        return 0;
-    }
-  }
-
-  static convertDayNumberToDayName(dayNumber: number): DaysEnum {
-    switch (dayNumber) {
-      case 1:
-        return DaysEnum.Mon;
-      case 2:
-        return DaysEnum.Tue;
-      case 3:
-        return DaysEnum.Wed;
-      case 4:
-        return DaysEnum.Thu;
-      case 5:
-        return DaysEnum.Fri;
-      case 6:
-        return DaysEnum.Sat;
-      case 0:
-      default:
-        return DaysEnum.Sun;
-    }
   }
 
   static compareDate(params: {
