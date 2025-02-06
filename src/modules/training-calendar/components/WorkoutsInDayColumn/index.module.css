@@ -4,14 +4,6 @@
     grid-template-rows: max-content 100%;
     gap: 9px;
     min-width: 179px;
-
-    &:first-child {
-        margin-left: 63.5px;
-    }
-
-    &:last-child {
-        margin-right: 63.5px;
-    }
 }
 
 .kanban-column__day {
